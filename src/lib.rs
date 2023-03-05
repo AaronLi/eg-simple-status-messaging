@@ -81,7 +81,6 @@ impl<C, E, Target> LedPrinter<C, E, Target> where Target: DrawTarget<Color=C, Er
             sleep(Duration::from_millis(step_period));
             let controller = task_controller.lock().unwrap();
             running = *controller;
-            println!("{x_pos} {direction:?}");
         }
     }
 
@@ -90,7 +89,6 @@ impl<C, E, Target> LedPrinter<C, E, Target> where Target: DrawTarget<Color=C, Er
             let mut task_controller = self.display_task_controller.lock().expect("Failed to lock");
             *task_controller = false;
             drop(task_controller);
-            println!("joining");
             handle.join().unwrap();
         }
         let mut task_controller = self.display_task_controller.lock().expect("Failed to lock");
