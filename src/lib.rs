@@ -39,7 +39,7 @@ impl<C, E, Target> LedPrinter<C, E, Target> where Target: DrawTarget<Color=C, Er
         })
     }
 
-    fn display_task(target: Arc<RwLock<impl DrawTarget<Color=C, Error=E>>>, spp: u16, task_controller: Arc<Mutex<bool>>, to_display: String, black: C, color: C){
+    fn text_display_task(target: Arc<RwLock<impl DrawTarget<Color=C, Error=E>>>, spp: u16, task_controller: Arc<Mutex<bool>>, to_display: String, black: C, color: C){
         let renderer = FontRenderer::new::<u8g2_fonts::fonts::u8g2_font_standardized3x5_tr>();
         let width = renderer.get_rendered_dimensions(to_display.as_str(), Point::zero(), VerticalPosition::Top).unwrap().bounding_box.unwrap().size.width as i32;
         let mut x_pos = 0;
@@ -101,7 +101,7 @@ impl<C, E, Target> LedPrinter<C, E, Target> where Target: DrawTarget<Color=C, Er
         let task_controller = Arc::clone(&self.display_task_controller);
         let text = text.to_string();
         let spp = self.scroll_spp_ms;
-        let _ = self.display_task.insert(spawn(move ||{Self::display_task(draw_target, spp, task_controller, text, black.clone(), color.clone())}));
+        let _ = self.display_task.insert(spawn(move ||{Self::text_display_task(draw_target, spp, task_controller, text, black.clone(), color.clone())}));
     }
 }
 

@@ -9,5 +9,7 @@ edition = "2021"
 ws2812-esp32-rmt-driver = { version = "0.5.0", features=["embedded-graphics-core", "unstable"] }
 embedded-graphics = "0.7.1"
 embedded-svc = "0.24.0"
-embedded-graphics-simulator = "0.4.0"
 u8g2-fonts = { git="https://github.com/Finomnis/u8g2-fonts", features=["embedded_graphics_textstyle"] }
+
+[dev-dependencies]
+embedded-graphics-simulator = "0.4.0"
